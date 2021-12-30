@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-intent-config" version="1.0.0">
+	<name>Intent Config</name>
+	<description>Intent Config</description>
+	<license>MIT</license>
+	<keywords>intentconfig</keywords>
+
+	<!-- android -->
+	<platform name="android">
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application/activity" mode="replace">
+            <intent-filter android:label="@string/launcher_name">
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+			<intent-filter android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="https" android:host="app.entel.cl" android:pathPrefix="/open" />
+				<data android:scheme="https" android:host="app.entel.cl" android:pathPrefix="/Entel" />
+				<data android:scheme="https" android:host="app.entel.cl" android:pathPrefix="/ul" />
+				<data android:scheme="https" android:host="app.entel.cl" android:pathPrefix="/Personas" />
+				<data android:scheme="https" android:host="app.entel.cl" android:pathPrefix="/Hogar" />
+			</intent-filter>
+		</config-file>
+		
+	</platform>
+
+	<!-- ios -->
+	<platform name="ios">
+
+		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
+			<array>
+				<dict>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>cl.entel.appentel</string>
+					</array>
+				</dict>
+			</array>
+		</config-file>
+
+		<config-file parent="aps-environment" target="*/Entitlements-Debug.plist">
+            <string>development</string>
+		</config-file>
+
+		<config-file parent="com.apple.developer.associated-domains" target="*/Entitlements-Debug.plist">
+			<array>
+				<string>applinks:app.entel.cl</string>
+			</array>
+		</config-file>
+
+		<config-file parent="aps-environment" target="*/Entitlements-Release.plist">
+            <string>production</string>
+		</config-file>
+
+		<config-file parent="com.apple.developer.associated-domains" target="*/Entitlements-Release.plist">
+			<array>
+				<string>applinks:app.entel.cl</string>
+			</array>
+		</config-file>
+		
+	</platform>
+	
+</plugin>
